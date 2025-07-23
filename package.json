@@ -1,0 +1,20 @@
+{
+  "name": "coding-challenge-30days",
+  "version": "1.0.0",
+  "main": "practice.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sandhya10000/coding-challenge-30days.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sandhya10000/coding-challenge-30days/issues"
+  },
+  "homepage": "https://github.com/sandhya10000/coding-challenge-30days#readme",
+  "description": ""
+}
