@@ -160,7 +160,7 @@ const ocur = arr2.reduce((acc, val) => {
 console.log(ocur);
 
 /**
- * Slice function add and remove element and it is not modify the original array
+ * Slice function Extract a portion of an array	 and it is not modify the original array
  *  
  * array.slice(start, end);
 
@@ -180,5 +180,10 @@ console.log(sliced1, "sliced1========="); // [20, 30, 40]
 console.log(slicearr1); // Original array remains unchanged
 
 /**
- * splice
+ * splice Add or remove elements from an array
+ * splice(start, deleteCount, ...items)
  */
+
+let spliceArray = [12, 34, 45, 67, 87];
+let spliced = spliceArray.splice(1, 3);
+console.log(spliced, "spliced============");
