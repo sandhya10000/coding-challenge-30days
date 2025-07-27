@@ -179,4 +179,6 @@ const sliced1 = slicearr1.slice(1, 4);
 console.log(sliced1, "sliced1========="); // [20, 30, 40]
 console.log(slicearr1); // Original array remains unchanged
 
-/** */
+/**
+ * splice
+ */
