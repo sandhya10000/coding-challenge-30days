@@ -1,0 +1,305 @@
+1. Server Connection using Express.js
+// server.js
+const express = require('express');
+const mongoose = require('mongoose');
+const app = express();
+const PORT = 3000;
+
+// Middleware
+app.use(express.json());
+
+// Test Route
+app.get('/', (req, res) => {
+  res.send('Server is running...');
+});
+
+// Listen
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
+
+2)Database Connection in Mongodb
+// mongo.js (or include directly in server.js)
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:27017/queryDB', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.error('MongoDB connection error:', err));
+
+ 3. Define Schema to Save Query
+// models/Query.js
+const mongoose = require('mongoose');
+
+const querySchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  message: {
+    type: String,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+module.exports = mongoose.model('Query', querySchema);
+
+Q)What is the difference between MongoDB Schema Design and Relational Schema Design?
+| Feature          | MongoDB (NoSQL Schema Design)                  | Relational DB (SQL Schema Design)   |
+| ---------------- | ---------------------------------------------- | ----------------------------------- |
+| Structure        | Flexible (schema-less or dynamic schema)       | Rigid (predefined tables & columns) |
+| Storage          | Collections & Documents (JSON-like)            | Tables & Rows                       |
+| Joins            | Not encouraged; data is embedded or referenced | Supported with JOIN statements      |
+| Schema Evolution | Easy and flexible                              | Requires migrations                 |
+| Performance      | Faster with embedded documents                 | May slow down with heavy joins      |
+
+Q). Difference between Authentication and Authorization
+
+| Feature  | Authentication                          | Authorization                         |
+| -------- | --------------------------------------- | ------------------------------------- |
+| Meaning  | Verifies **who the user is**            | Verifies **what user can access**     |
+| Example  | Login with email/password               | Allow only admin to access dashboard  |
+| Order    | Happens **before** authorization        | Happens **after** authentication      |
+| Based on | Credentials (username, password, token) | Roles, permissions, access policies   |
+| In Code  | JWT validation, passport.js             | Role-based access check, route guards |
+
+Q. Difference Between State and Props in React
+
+| Feature    | State                                       | Props                          |
+| ---------- | ------------------------------------------- | ------------------------------ |
+| Owned by   | Component itself                            | Parent component               |
+| Mutability | Mutable (via `useState` or `this.setState`) | Immutable (read-only)          |
+| Usage      | Store local data or UI state                | Pass data from parent to child |
+| Example    | `const [count, setCount] = useState(0)`     | `<Child name="React" />`       |
+
+Q. How to Handle Asynchronous Code in JavaScript / Node.js?
+Callbacks: -
+fs.readFile('file.txt', (err, data) => {
+  if (err) throw err;
+  console.log(data.toString());
+});
+
+🔸 2. Promises
+fetchData()
+  .then(data => console.log(data))
+  .catch(err => console.error(err));
+
+🔸 3. async/await (Preferred)
+
+async function getUser() {
+  try {
+    const user = await fetchUser();
+    console.log(user);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+🔸 4. Using Promise.all()
+
+const [res1, res2] = await Promise.all([api1(), api2()]);
+
+
+Question1) Server connection using NodeJs  
+// server.js
+
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Server running!');
+});
+
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Server started at http://localhost:${PORT}`);
+});
+
+
+Q.2) Dotenv file access
+Solution: -
+
+Solution:- require('dotenv').config();
+
+const PORT = process.env.PORT;
+const DB_URL = process.env.DB_URL;
+console.log(PORT, DB_URL);
+
+
+Q. 3) Difference b/w null and undefined.
+Solution:-
+
+Feature
+null
+undefined
+Meaning
+Value is intentionally empty
+Value is not assigned (default)
+Type
+Object
+Undefined
+Example
+let a = null;
+let b; // b is undefined
+Use Case
+Manually assigned by developer
+Automatically assigned by JS engine
+
+
+Q.4) Promise.all and promise.any
+Solution:- 
+
+Feature
+Promise.all
+Promise.any
+Purpose
+Waits for all promises to succeed
+Returns first fulfilled promise
+Fails If...
+Any one fails → whole thing fails
+All fail → throws AggregateError
+
+
+const p1 = Promise.resolve(1);
+const p2 = Promise.resolve(2);
+const p3 = Promise.reject("Error");
+
+Promise.all([p1, p2])
+  .then(console.log); // [1, 2]
+
+Promise.any([p3, p2])
+  .then(console.log); // 2
+
+
+Q.5)Monolithic VS Microservices
+Solution:-
+
+Feature
+Monolithic App
+Microservices Architecture
+Structure
+Single codebase
+Multiple independent services
+Deployment
+One unit
+Independent deployment per service
+Scalability
+Harder to scale
+Easily scalable per service
+Failure Impact
+Entire app might fail
+One service fails → others run
+
+
+Q.6) How do I find current date in nodejs?
+Solution:- 
+const currentDate = new Date();
+console.log(currentDate);                   // Full date-time
+console.log(currentDate.toDateString());   // e.g., "Wed Jul 03 2025"
+console.log(currentDate.toISOString());    // e.g., "2025-07-03T08:36:19.892Z"
+
+
+Q.7) What is the promise?
+Solution:-
+Promise is a JS object that represents the eventual completion or failure of asynchronous operation.
+States:
+pending → operation ongoing
+
+
+fulfilled → operation successful
+
+
+rejected → operation failed
+
+
+Function fetchData()
+{
+Return new Promise((reject, resolve)=>{
+setTimeout(()=>{
+let success = true;
+if(success){
+resolve(){
+console.log(‘I am success’)}
+}
+Else{
+reject(){
+console.log(‘I am failure’)}
+}
+console.log(“Hi I am promise”)})
+}, 2000)
+}
+
+ fetchData() .then(data => console.log(data))       // Data received
+  .catch(err => console.error(err));     
+
+
+
+
+
+✅ 1. What is Reconciliation in React?
+Reconciliation is the process React uses to update the DOM efficiently. When state or props change, React compares the new virtual DOM with the previous one and updates only the changed parts in the actual DOM.
+
+
+
+
+✅ 3. Difference between WHERE and HAVING Clause
+Clause
+Use
+WHERE
+Filters rows before grouping (used with SELECT)
+HAVING
+Filters groups after GROUP BY is applied
+
+Example:
+WHERE filters individual records.
+
+
+HAVING filters grouped records like total sales > 1000.
+
+
+
+✅ 4. What is Express.js?
+Express.js is a lightweight web application framework for Node.js that helps build APIs and web apps quickly. It simplifies routing, middleware use, and server-side logic.
+
+✅ 5. What is Middleware in Express.js?
+Middleware is a function that has access to request, response, and the next() function. It can:
+Modify the request or response
+
+
+End the request-response cycle
+
+
+Call the next middleware
+
+
+
+✅ 6. Use and Explanation of Middleware
+Uses:
+Authentication (e.g., check JWT token)
+
+
+Logging
+
+
+Error handling
+
+
+Request body parsing
+
+
+Example:
+app.use((req, res, next) => {
+  console.log('Request received');
+  next(); // Move to the next middleware
+});
+
